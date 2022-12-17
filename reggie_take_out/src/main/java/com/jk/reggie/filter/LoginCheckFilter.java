@@ -30,6 +30,7 @@ public class LoginCheckFilter implements Filter {
         //放行路径数组
         String[] uris = new String[]{
                 "/employee/login",
+                "/user/login",
                 "/employee/logout",
                 "/backend/**",
                 "/front/**"
@@ -49,6 +50,16 @@ public class LoginCheckFilter implements Filter {
 
             //treadLocal中存入用户id
             BaseContext.setCurrent((Long)request.getSession().getAttribute("employee"));
+
+            filterChain.doFilter(request, response);
+            return;
+        }
+
+        if (request.getSession().getAttribute("user") != null){
+            log.info("用户已登录");
+
+            //treadLocal中存入用户id
+            BaseContext.setCurrent((Long)request.getSession().getAttribute("user"));
 
             filterChain.doFilter(request, response);
             return;

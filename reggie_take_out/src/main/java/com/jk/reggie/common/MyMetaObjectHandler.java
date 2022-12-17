@@ -18,7 +18,7 @@ public class MyMetaObjectHandler implements MetaObjectHandler {
 
     @Override
     public void updateFill(MetaObject metaObject) {
-        metaObject.setValue("createTime", LocalDateTime.now());
+        metaObject.setValue("updateUser", BaseContext.getCurrent());
         metaObject.setValue("updateTime", LocalDateTime.now());
     }
 }
